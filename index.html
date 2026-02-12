@@ -34,7 +34,7 @@
 <body class="min-vh-100 d-flex align-items-center justify-content-center page-bg">
 
 <div class="card shadow-lg border-0 rounded-4 p-4 text-center bg-white text-dark search-card"
-     style="max-width: 500px; width: 100%;">
+     id="search-view" style="max-width: 500px; width: 100%;">
 
   <h2 class="fw-semibold mb-1">Naroda Sky</h2>
   <p class="small text-muted">Vehicle Information Lookup</p>
@@ -64,616 +64,3104 @@
   <div id="search-result" class="mt-3"></div>
 </div>
 
+<div class="container-fluid" id="table-view" style="display: none">
+  <div class="row">
+    <div class="col-4">&nbsp;</div>
+    <div class="col-4">
+      <div class="card shadow-lg border-0 rounded-4 p-4 text-center bg-white text-dark search-card mb-5"
+           style="max-width: 500px; width: 100%;">
+
+        <h2 class="fw-semibold mb-1">Naroda Sky</h2>
+        <p class="small text-muted">Block Info</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <div class="card shadow-lg border-0 rounded-4 p-4 text-center bg-white text-dark search-card"
+           style="max-width: 500px; width: 100%;">
+        <h2 class="fw-semibold mb-1">Block A</h2>
+        <div id="block-A"></div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card shadow-lg border-0 rounded-4 p-4 text-center bg-white text-dark search-card"
+           style="max-width: 500px; width: 100%;">
+        <h2 class="fw-semibold mb-1">Block B</h2>
+        <div id="block-B"></div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card shadow-lg border-0 rounded-4 p-4 text-center bg-white text-dark search-card"
+           style="max-width: 500px; width: 100%;">
+        <h2 class="fw-semibold mb-1">Block C</h2>
+        <div id="block-C"></div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card shadow-lg border-0 rounded-4 p-4 text-center bg-white text-dark search-card"
+           style="max-width: 500px; width: 100%;">
+        <h2 class="fw-semibold mb-1">Block D</h2>
+        <div id="block-D"></div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card shadow-lg border-0 rounded-4 p-4 text-center bg-white text-dark search-card"
+           style="max-width: 500px; width: 100%;">
+        <h2 class="fw-semibold mb-1">Block E</h2>
+        <div id="block-E"></div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card shadow-lg border-0 rounded-4 p-4 text-center bg-white text-dark search-card"
+           style="max-width: 500px; width: 100%;">
+        <h2 class="fw-semibold mb-1">Block F</h2>
+        <div id="block-F"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 
   const TWO_WHEEL = '2-wheel';
   const THREE_WHEEL = '3-wheel';
   const FOUR_WHEEL = '4-wheel';
 
-const owners = [
-  { unit: 'A-101', name:'', phone: '', is_owner: true },
-  { unit: 'A-102', name:'', phone: '', is_owner: true },
-  { unit: 'A-103', name:'', phone: '', is_owner: true },
-  { unit: 'A-104', name:'', phone: '', is_owner: true },
-
-  { unit: 'A-201', name:'', phone: '', is_owner: true },
-  { unit: 'A-202', name:'', phone: '', is_owner: true },
-  { unit: 'A-203', name:'', phone: '', is_owner: true },
-  { unit: 'A-204', name:'', phone: '', is_owner: true },
-
-  { unit: 'A-301', name:'', phone: '', is_owner: true },
-  { unit: 'A-302', name:'', phone: '', is_owner: true },
-  { unit: 'A-303', name:'', phone: '', is_owner: true },
-  { unit: 'A-304', name:'', phone: '', is_owner: true },
-
-  { unit: 'A-401', name:'', phone: '', is_owner: true },
-  { unit: 'A-402', name:'', phone: '', is_owner: true },
-  { unit: 'A-403', name:'', phone: '', is_owner: true },
-  { unit: 'A-404', name:'', phone: '', is_owner: true },
-
-  { unit: 'A-501', name:'', phone: '', is_owner: true },
-  { unit: 'A-502', name:'', phone: '', is_owner: true },
-  { unit: 'A-503', name:'', phone: '', is_owner: true },
-  { unit: 'A-504', name:'', phone: '', is_owner: true },
-
-  { unit: 'A-601', name:'', phone: '', is_owner: true },
-  { unit: 'A-602', name:'', phone: '', is_owner: true },
-  { unit: 'A-603', name:'', phone: '', is_owner: true },
-  { unit: 'A-604', name:'', phone: '', is_owner: true },
-
-  { unit: 'A-701', name:'', phone: '', is_owner: true },
-  { unit: 'A-702', name:'', phone: '', is_owner: true },
-  { unit: 'A-703', name:'', phone: '', is_owner: true },
-  { unit: 'A-704', name:'', phone: '', is_owner: true },
-
-  { unit: 'A-801', name:'', phone: '', is_owner: true },
-  { unit: 'A-802', name:'', phone: '', is_owner: true },
-  { unit: 'A-803', name:'', phone: '', is_owner: true },
-  { unit: 'A-804', name:'', phone: '', is_owner: true },
-
-  { unit: 'A-901', name:'', phone: '', is_owner: true },
-  { unit: 'A-902', name:'', phone: '', is_owner: true },
-  { unit: 'A-903', name:'', phone: '', is_owner: true },
-  { unit: 'A-904', name:'', phone: '', is_owner: true },
-
-  { unit: 'A-1001', name:'', phone: '', is_owner: true },
-  { unit: 'A-1002', name:'', phone: '', is_owner: true },
-  { unit: 'A-1003', name:'', phone: '', is_owner: true },
-  { unit: 'A-1004', name:'', phone: '', is_owner: true },
-
-  { unit: 'A-1101', name:'', phone: '', is_owner: true },
-  { unit: 'A-1102', name:'', phone: '', is_owner: true },
-  { unit: 'A-1103', name:'', phone: '', is_owner: true },
-  { unit: 'A-1104', name:'', phone: '', is_owner: true },
-
-  { unit: 'A-1201', name:'', phone: '', is_owner: true },
-  { unit: 'A-1202', name:'', phone: '', is_owner: true },
-  { unit: 'A-1203', name:'', phone: '', is_owner: true },
-  { unit: 'A-1204', name:'', phone: '', is_owner: true },
-
-  { unit: 'A-1301', name:'', phone: '', is_owner: true },
-  { unit: 'A-1302', name:'', phone: '', is_owner: true },
-  { unit: 'A-1303', name:'', phone: '', is_owner: true },
-  { unit: 'A-1304', name:'', phone: '', is_owner: true },
-
-
-
-
-
-  { unit: 'B-101', name:'', phone: '', is_owner: true },
-  { unit: 'B-102', name:'MANISH DIVAKAR', phone: '', is_owner: true },
-  { unit: 'B-103', name:'', phone: '', is_owner: true },
-  { unit: 'B-104', name:'', phone: '', is_owner: true },
-
-  { unit: 'B-201', name:'', phone: '', is_owner: true },
-  { unit: 'B-202', name:'', phone: '', is_owner: true },
-  { unit: 'B-203', name:'', phone: '', is_owner: true },
-  { unit: 'B-204', name:'', phone: '', is_owner: true },
-
-  { unit: 'B-301', name:'RAJESHBHAI PATEL', phone: '9426367966', is_owner: true },
-  { unit: 'B-302', name:'', phone: '', is_owner: true },
-  { unit: 'B-303', name:'', phone: '', is_owner: true },
-  { unit: 'B-304', name:'', phone: '', is_owner: true },
-
-  { unit: 'B-401', name:'', phone: '', is_owner: true },
-  { unit: 'B-402', name:'', phone: '', is_owner: true },
-  { unit: 'B-403', name:'', phone: '', is_owner: true },
-  { unit: 'B-404', name:'', phone: '', is_owner: true },
-
-  { unit: 'B-501', name:'BHARATBHAI PATEL', phone: '9824855033', is_owner: true },
-  { unit: 'B-502', name:'', phone: '', is_owner: true },
-  { unit: 'B-503', name:'', phone: '', is_owner: true },
-  { unit: 'B-504', name:'', phone: '', is_owner: true },
-
-  { unit: 'B-601', name:'RAJDEEP NAYAK', phone: '8156073303', is_owner: true },
-  { unit: 'B-602', name:'', phone: '', is_owner: true },
-  { unit: 'B-603', name:'NILESH SHARMA', phone: '', is_owner: true },
-  { unit: 'B-604', name:'', phone: '', is_owner: true },
-
-  { unit: 'B-701', name:'', phone: '', is_owner: true },
-  { unit: 'B-702', name:'', phone: '', is_owner: true },
-  { unit: 'B-703', name:'', phone: '', is_owner: true },
-  { unit: 'B-704', name:'', phone: '', is_owner: true },
-
-  { unit: 'B-801', name:'', phone: '', is_owner: true },
-  { unit: 'B-802', name:'', phone: '', is_owner: true },
-  { unit: 'B-803', name:'', phone: '', is_owner: true },
-  { unit: 'B-804', name:'', phone: '', is_owner: true },
-
-  { unit: 'B-901', name:'', phone: '', is_owner: true },
-  { unit: 'B-902', name:'', phone: '', is_owner: true },
-  { unit: 'B-903', name:'', phone: '', is_owner: true },
-  { unit: 'B-904', name:'', phone: '', is_owner: true },
-
-  { unit: 'B-1001', name:'RAJESHKUMAR SUTHAR', phone: '', is_owner: true },
-  { unit: 'B-1002', name:'', phone: '', is_owner: true },
-  { unit: 'B-1003', name:'', phone: '', is_owner: true },
-  { unit: 'B-1004', name:'', phone: '', is_owner: true },
-
-  { unit: 'B-1101', name:'', phone: '', is_owner: true },
-  { unit: 'B-1102', name:'', phone: '', is_owner: true },
-  { unit: 'B-1103', name:'', phone: '', is_owner: true },
-  { unit: 'B-1104', name:'', phone: '', is_owner: true },
-
-  { unit: 'B-1201', name:'', phone: '', is_owner: true },
-  { unit: 'B-1202', name:'', phone: '', is_owner: true },
-  { unit: 'B-1203', name:'', phone: '', is_owner: true },
-  { unit: 'B-1204', name:'', phone: '', is_owner: true },
-
-  { unit: 'B-1301', name:'', phone: '', is_owner: true },
-  { unit: 'B-1302', name:'', phone: '', is_owner: true },
-  { unit: 'B-1303', name:'', phone: '', is_owner: true },
-  { unit: 'B-1304', name:'', phone: '', is_owner: true },
-
-
-
-
-
-  { unit: 'C-101', name:'', phone: '', is_owner: true },
-  { unit: 'C-102', name:'', phone: '', is_owner: true },
-  { unit: 'C-103', name:'', phone: '', is_owner: true },
-  { unit: 'C-104', name:'', phone: '', is_owner: true },
-
-  { unit: 'C-201', name:'', phone: '', is_owner: true },
-  { unit: 'C-202', name:'', phone: '', is_owner: true },
-  { unit: 'C-203', name:'', phone: '', is_owner: true },
-  { unit: 'C-204', name:'', phone: '', is_owner: true },
-
-  { unit: 'C-301', name:'', phone: '', is_owner: true },
-  { unit: 'C-302', name:'', phone: '', is_owner: true },
-  { unit: 'C-303', name:'', phone: '', is_owner: true },
-  { unit: 'C-304', name:'', phone: '', is_owner: true },
-
-  { unit: 'C-401', name:'', phone: '', is_owner: true },
-  { unit: 'C-402', name:'HARSHABEN PATEL', phone: '9426524897', is_owner: true },
-  { unit: 'C-403', name:'', phone: '', is_owner: true },
-  { unit: 'C-404', name:'', phone: '', is_owner: true },
-
-  { unit: 'C-501', name:'', phone: '', is_owner: true },
-  { unit: 'C-502', name:'', phone: '', is_owner: true },
-  { unit: 'C-503', name:'', phone: '', is_owner: true },
-  { unit: 'C-504', name:'', phone: '', is_owner: true },
-
-  { unit: 'C-601', name:'', phone: '', is_owner: true },
-  { unit: 'C-602', name:'', phone: '', is_owner: true },
-  { unit: 'C-603', name:'', phone: '', is_owner: true },
-  { unit: 'C-604', name:'TARUN KUMAR DARJI', phone: '', is_owner: true },
-
-  { unit: 'C-701', name:'PATEL ANKIT', phone: '', is_owner: true },
-  { unit: 'C-702', name:'', phone: '', is_owner: true },
-  { unit: 'C-703', name:'', phone: '', is_owner: true },
-  { unit: 'C-704', name:'', phone: '', is_owner: true },
-
-  { unit: 'C-801', name:'', phone: '', is_owner: true },
-  { unit: 'C-802', name:'', phone: '', is_owner: true },
-  { unit: 'C-803', name:'', phone: '', is_owner: true },
-  { unit: 'C-804', name:'PRAMOD KUMAR TIWARI', phone: '', is_owner: true },
-
-  { unit: 'C-901', name:'', phone: '', is_owner: true },
-  { unit: 'C-902', name:'', phone: '', is_owner: true },
-  { unit: 'C-903', name:'', phone: '', is_owner: true },
-  { unit: 'C-904', name:'', phone: '', is_owner: true },
-
-  { unit: 'C-1001', name:'', phone: '', is_owner: true },
-  { unit: 'C-1002', name:'', phone: '', is_owner: true },
-  { unit: 'C-1003', name:'', phone: '', is_owner: true },
-  { unit: 'C-1004', name:'', phone: '', is_owner: true },
-
-  { unit: 'C-1101', name:'', phone: '', is_owner: true },
-  { unit: 'C-1102', name:'', phone: '', is_owner: true },
-  { unit: 'C-1103', name:'', phone: '', is_owner: true },
-  { unit: 'C-1104', name:'', phone: '', is_owner: true },
-
-  { unit: 'C-1201', name:'', phone: '', is_owner: true },
-  { unit: 'C-1202', name:'', phone: '', is_owner: true },
-  { unit: 'C-1203', name:'', phone: '', is_owner: true },
-  { unit: 'C-1204', name:'VRAGESHKUMAR DHOBI', phone: '', is_owner: true },
-
-  { unit: 'C-1301', name:'', phone: '', is_owner: true },
-  { unit: 'C-1302', name:'', phone: '', is_owner: true },
-  { unit: 'C-1303', name:'', phone: '', is_owner: true },
-  { unit: 'C-1304', name:'', phone: '', is_owner: true },
-
-
-
-
-
-  { unit: 'D-101', name:'', phone: '', is_owner: true },
-  { unit: 'D-102', name:'', phone: '', is_owner: true },
-  { unit: 'D-103', name:'', phone: '', is_owner: true },
-  { unit: 'D-104', name:'', phone: '', is_owner: true },
-
-  { unit: 'D-201', name:'', phone: '', is_owner: true },
-  { unit: 'D-202', name:'', phone: '', is_owner: true },
-  { unit: 'D-203', name:'', phone: '', is_owner: true },
-  { unit: 'D-204', name:'', phone: '', is_owner: true },
-
-  { unit: 'D-301', name:'', phone: '', is_owner: true },
-  { unit: 'D-302', name:'', phone: '', is_owner: true },
-  { unit: 'D-303', name:'', phone: '', is_owner: true },
-  { unit: 'D-304', name:'', phone: '', is_owner: true },
-
-  { unit: 'D-401', name:'BHUPENDRABHAI PRAJAPATI', phone: '', is_owner: true },
-  { unit: 'D-402', name:'', phone: '', is_owner: true },
-  { unit: 'D-403', name:'', phone: '', is_owner: true },
-  { unit: 'D-404', name:'', phone: '', is_owner: true },
-
-  { unit: 'D-501', name:'', phone: '', is_owner: true },
-  { unit: 'D-502', name:'RINKU BAGHEL', phone: '', is_owner: true },
-  { unit: 'D-503', name:'', phone: '', is_owner: true },
-  { unit: 'D-504', name:'', phone: '', is_owner: true },
-
-  { unit: 'D-601', name:'', phone: '', is_owner: true },
-  { unit: 'D-602', name:'', phone: '', is_owner: true },
-  { unit: 'D-603', name:'', phone: '', is_owner: true },
-  { unit: 'D-604', name:'', phone: '', is_owner: true },
-
-  { unit: 'D-701', name:'', phone: '', is_owner: true },
-  { unit: 'D-702', name:'', phone: '', is_owner: true },
-  { unit: 'D-703', name:'MAYURPURI GOSWAMI', phone: '9106983302', is_owner: true },
-  { unit: 'D-704', name:'', phone: '', is_owner: true },
-
-  { unit: 'D-801', name:'', phone: '', is_owner: true },
-  { unit: 'D-802', name:'', phone: '', is_owner: true },
-  { unit: 'D-803', name:'', phone: '', is_owner: true },
-  { unit: 'D-804', name:'', phone: '', is_owner: true },
-
-  { unit: 'D-901', name:'', phone: '', is_owner: true },
-  { unit: 'D-902', name:'', phone: '', is_owner: true },
-  { unit: 'D-903', name:'', phone: '', is_owner: true },
-  { unit: 'D-904', name:'', phone: '', is_owner: true },
-
-  { unit: 'D-1001', name:'', phone: '', is_owner: true },
-  { unit: 'D-1002', name:'', phone: '', is_owner: true },
-  { unit: 'D-1003', name:'', phone: '', is_owner: true },
-  { unit: 'D-1004', name:'', phone: '', is_owner: true },
-
-  { unit: 'D-1101', name:'', phone: '', is_owner: true },
-  { unit: 'D-1102', name:'', phone: '', is_owner: true },
-  { unit: 'D-1103', name:'', phone: '', is_owner: true },
-  { unit: 'D-1104', name:'', phone: '', is_owner: true },
-
-  { unit: 'D-1201', name:'', phone: '', is_owner: true },
-  { unit: 'D-1202', name:'', phone: '', is_owner: true },
-  { unit: 'D-1203', name:'', phone: '', is_owner: true },
-  { unit: 'D-1204', name:'', phone: '', is_owner: true },
-
-  { unit: 'D-1301', name:'', phone: '', is_owner: true },
-  { unit: 'D-1302', name:'', phone: '', is_owner: true },
-  { unit: 'D-1303', name:'', phone: '', is_owner: true },
-  { unit: 'D-1304', name:'', phone: '', is_owner: true },
-
-
-
-
-
-  { unit: 'E-101', name:'', phone: '', is_owner: true },
-  { unit: 'E-102', name:'', phone: '', is_owner: true },
-  { unit: 'E-103', name:'', phone: '', is_owner: true },
-  { unit: 'E-104', name:'', phone: '', is_owner: true },
-  { unit: 'E-105', name:'', phone: '', is_owner: true },
-
-  { unit: 'E-201', name:'', phone: '', is_owner: true },
-  { unit: 'E-202', name:'SACHINBHAI OAD', phone: '9925505895', is_owner: true },
-  { unit: 'E-203', name:'', phone: '', is_owner: true },
-  { unit: 'E-204', name:'', phone: '', is_owner: true },
-  { unit: 'E-205', name:'', phone: '', is_owner: true },
-
-  { unit: 'E-301', name:'', phone: '', is_owner: true },
-  { unit: 'E-302', name:'', phone: '', is_owner: true },
-  { unit: 'E-303', name:'', phone: '', is_owner: true },
-  { unit: 'E-304', name:'FORAMBEN VYAS', phone: '', is_owner: true },
-  { unit: 'E-305', name:'', phone: '', is_owner: true },
-
-  { unit: 'E-401', name:'', phone: '', is_owner: true },
-  { unit: 'E-402', name:'', phone: '', is_owner: true },
-  { unit: 'E-403', name:'', phone: '', is_owner: true },
-  { unit: 'E-404', name:'', phone: '', is_owner: true },
-  { unit: 'E-405', name:'', phone: '', is_owner: true },
-
-  { unit: 'E-501', name:'', phone: '', is_owner: true },
-  { unit: 'E-502', name:'', phone: '', is_owner: true },
-  { unit: 'E-503', name:'', phone: '', is_owner: true },
-  { unit: 'E-504', name:'', phone: '', is_owner: true },
-  { unit: 'E-505', name:'', phone: '', is_owner: true },
-
-  { unit: 'E-601', name:'', phone: '', is_owner: true },
-  { unit: 'E-602', name:'', phone: '', is_owner: true },
-  { unit: 'E-603', name:'', phone: '', is_owner: true },
-  { unit: 'E-604', name:'', phone: '', is_owner: true },
-  { unit: 'E-605', name:'', phone: '', is_owner: true },
-
-  { unit: 'E-701', name:'', phone: '', is_owner: true },
-  { unit: 'E-702', name:'', phone: '', is_owner: true },
-  { unit: 'E-703', name:'', phone: '', is_owner: true },
-  { unit: 'E-704', name:'', phone: '', is_owner: true },
-  { unit: 'E-705', name:'', phone: '', is_owner: true },
-
-  { unit: 'E-801', name:'', phone: '', is_owner: true },
-  { unit: 'E-802', name:'', phone: '', is_owner: true },
-  { unit: 'E-803', name:'', phone: '', is_owner: true },
-  { unit: 'E-804', name:'', phone: '', is_owner: true },
-  { unit: 'E-805', name:'', phone: '', is_owner: true },
-
-  { unit: 'E-901', name:'PATEL BHAVESHKUMAR', phone: '', is_owner: true },
-  { unit: 'E-902', name:'', phone: '', is_owner: true },
-  { unit: 'E-903', name:'', phone: '', is_owner: true },
-  { unit: 'E-904', name:'', phone: '', is_owner: true },
-  { unit: 'E-905', name:'', phone: '', is_owner: true },
-
-  { unit: 'E-1001', name:'', phone: '', is_owner: true },
-  { unit: 'E-1002', name:'', phone: '', is_owner: true },
-  { unit: 'E-1003', name:'', phone: '', is_owner: true },
-  { unit: 'E-1004', name:'RILESH KUMAR BAROT', phone: '', is_owner: true },
-  { unit: 'E-1005', name:'', phone: '', is_owner: true },
-
-  { unit: 'E-1101', name:'', phone: '', is_owner: true },
-  { unit: 'E-1102', name:'', phone: '', is_owner: true },
-  { unit: 'E-1103', name:'', phone: '', is_owner: true },
-  { unit: 'E-1104', name:'', phone: '', is_owner: true },
-  { unit: 'E-1105', name:'KETULBHAI SUTHAR', phone: '9664696698', is_owner: true },
-
-  { unit: 'E-1201', name:'', phone: '', is_owner: true },
-  { unit: 'E-1202', name:'', phone: '', is_owner: true },
-  { unit: 'E-1203', name:'', phone: '', is_owner: true },
-  { unit: 'E-1204', name:'', phone: '', is_owner: true },
-  { unit: 'E-1205', name:'KATHAN PATEL', phone: '8200926737', is_owner: true },
-
-  { unit: 'E-1301', name:'', phone: '', is_owner: true },
-  { unit: 'E-1302', name:'', phone: '', is_owner: true },
-  { unit: 'E-1303', name:'', phone: '', is_owner: true },
-  { unit: 'E-1304', name:'', phone: '', is_owner: true },
-  { unit: 'E-1305', name:'', phone: '', is_owner: true },
-
-  { unit: 'E-1401', name:'', phone: '', is_owner: true },
-  { unit: 'E-1402', name:'', phone: '', is_owner: true },
-  { unit: 'E-1403', name:'', phone: '', is_owner: true },
-  { unit: 'E-1404', name:'', phone: '', is_owner: true },
-  { unit: 'E-1405', name:'', phone: '', is_owner: true },
-
-
-
-  { unit: 'F-101', name:'', phone: '', is_owner: true },
-  { unit: 'F-102', name:'', phone: '', is_owner: true },
-  { unit: 'F-103', name:'', phone: '', is_owner: true },
-  { unit: 'F-104', name:'', phone: '', is_owner: true },
-  { unit: 'F-105', name:'', phone: '', is_owner: true },
-
-  { unit: 'F-201', name:'NIRAV PATEL', phone: '', is_owner: true },
-  { unit: 'F-202', name:'', phone: '', is_owner: true },
-  { unit: 'F-203', name:'', phone: '', is_owner: true },
-  { unit: 'F-204', name:'', phone: '', is_owner: true },
-  { unit: 'F-205', name:'RATHOD RAKESH KUMAR', phone: '9913093281', is_owner: true },
-
-  { unit: 'F-301', name:'KRUNAL KUMAR PRAJAPATI', phone: '8511742509', is_owner: true },
-  { unit: 'F-302', name:'', phone: '', is_owner: true },
-  { unit: 'F-303', name:'', phone: '', is_owner: true },
-  { unit: 'F-304', name:'', phone: '', is_owner: true },
-  { unit: 'F-305', name:'', phone: '', is_owner: true },
-
-  { unit: 'F-401', name:'', phone: '', is_owner: true },
-  { unit: 'F-402', name:'', phone: '', is_owner: true },
-  { unit: 'F-403', name:'', phone: '', is_owner: true },
-  { unit: 'F-404', name:'', phone: '', is_owner: true },
-  { unit: 'F-405', name:'', phone: '', is_owner: true },
-
-  { unit: 'F-501', name:'', phone: '', is_owner: true },
-  { unit: 'F-502', name:'', phone: '', is_owner: true },
-  { unit: 'F-503', name:'', phone: '', is_owner: true },
-  { unit: 'F-504', name:'', phone: '', is_owner: true },
-  { unit: 'F-505', name:'', phone: '', is_owner: true },
-
-  { unit: 'F-601', name:'', phone: '', is_owner: true },
-  { unit: 'F-602', name:'', phone: '', is_owner: true },
-  { unit: 'F-603', name:'', phone: '', is_owner: true },
-  { unit: 'F-604', name:'', phone: '', is_owner: true },
-  { unit: 'F-605', name:'', phone: '', is_owner: true },
-
-  { unit: 'F-701', name:'', phone: '', is_owner: true },
-  { unit: 'F-702', name:'', phone: '', is_owner: true },
-  { unit: 'F-703', name:'', phone: '', is_owner: true },
-  { unit: 'F-704', name:'', phone: '', is_owner: true },
-  { unit: 'F-705', name:'', phone: '', is_owner: true },
-
-  { unit: 'F-801', name:'', phone: '', is_owner: true },
-  { unit: 'F-802', name:'', phone: '', is_owner: true },
-  { unit: 'F-803', name:'', phone: '', is_owner: true },
-  { unit: 'F-804', name:'', phone: '', is_owner: true },
-  { unit: 'F-805', name:'', phone: '', is_owner: true },
-
-  { unit: 'F-901', name:'', phone: '', is_owner: false },
-  { unit: 'F-902', name:'VIPUL MAHETA', phone: '', is_owner: false },
-  { unit: 'F-903', name:'', phone: '', is_owner: false },
-  { unit: 'F-904', name:'', phone: '', is_owner: false },
-  { unit: 'F-905', name:'', phone: '', is_owner: false },
-
-  { unit: 'F-1001', name:'HARSH KUMAR PATEL', phone: '', is_owner: false },
-  { unit: 'F-1002', name:'', phone: '', is_owner: true },
-  { unit: 'F-1003', name:'', phone: '', is_owner: true },
-  { unit: 'F-1004', name:'', phone: '', is_owner: true },
-  { unit: 'F-1005', name:'', phone: '', is_owner: true },
-
-  { unit: 'F-1101', name:'', phone: '', is_owner: true },
-  { unit: 'F-1102', name:'', phone: '', is_owner: true },
-  { unit: 'F-1103', name:'MAYURDHVAJSINH GOHEL', phone: '', is_owner: true },
-  { unit: 'F-1104', name:'', phone: '', is_owner: true },
-  { unit: 'F-1105', name:'', phone: '', is_owner: true },
-
-  { unit: 'F-1201', name:'', phone: '', is_owner: true },
-  { unit: 'F-1202', name:'', phone: '', is_owner: true },
-  { unit: 'F-1203', name:'', phone: '', is_owner: true },
-  { unit: 'F-1204', name:'', phone: '', is_owner: true },
-  { unit: 'F-1205', name:'', phone: '', is_owner: true },
-
-  { unit: 'F-1301', name:'', phone: '', is_owner: true },
-  { unit: 'F-1302', name:'', phone: '', is_owner: true },
-  { unit: 'F-1303', name:'', phone: '', is_owner: true },
-  { unit: 'F-1304', name:'', phone: '', is_owner: true },
-  { unit: 'F-1305', name:'', phone: '', is_owner: true },
-
-  { unit: 'F-1401', name:'', phone: '', is_owner: true },
-  { unit: 'F-1402', name:'', phone: '', is_owner: true },
-  { unit: 'F-1403', name:'', phone: '', is_owner: true },
-  { unit: 'F-1404', name:'KIRITBHAI PANDYA', phone: '', is_owner: true },
-  { unit: 'F-1405', name:'', phone: '', is_owner: true },
-
-];
-
-const vehicles = [
-
-
-  { unit: 'B-102', vehicle_number: "GJ-27-DJ-2960", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'B-102', vehicle_number: "GJ-01-TJ-9940", type: THREE_WHEEL, rc_verified: true},
-  { unit: 'B-102', vehicle_number: "GJ-27-EE-1488", type: FOUR_WHEEL, rc_verified: true},
-
-  { unit: 'B-301', vehicle_number: "GJ-27-DL-4100", type: TWO_WHEEL, rc_verified: false},
-  { unit: 'B-301', vehicle_number: "GJ-27-DD-0837", type: TWO_WHEEL, rc_verified: false},
-  { unit: 'B-301', vehicle_number: "GJ-27-ED-6167", type: FOUR_WHEEL, rc_verified: true},
-
-  { unit: 'B-501', vehicle_number: "GJ-01-UH-9056", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'B-501', vehicle_number: "GJ-01-JE-6814", type: TWO_WHEEL, rc_verified: false},
-  { unit: 'B-501', vehicle_number: "GJ-18-AH-5757", type: FOUR_WHEEL, rc_verified: true},
-
-  { unit: 'B-601', vehicle_number: "GJ-01-VG-7017", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'B-601', vehicle_number: "GJ-27-AC-4047", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'B-601', vehicle_number: "GJ-01-HV-8794", type: FOUR_WHEEL, rc_verified: true},
-
-  { unit: 'B-603', vehicle_number: "GJ-01-LS-9671", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'B-603', vehicle_number: "GJ-01-XG-1651", type: TWO_WHEEL, rc_verified: true},
-
-  { unit: 'B-1001', vehicle_number: "GJ-01-EA-6806", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'B-1001', vehicle_number: "GJ-01-NJ-6280", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'B-1001', vehicle_number: "GJ-01-RV-0206", type: FOUR_WHEEL, rc_verified: true},
-
-
-
-
-  { unit: 'C-402', vehicle_number: "GJ-09-CU-2716", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'C-402', vehicle_number: "GJ-09-AN-1874", type: TWO_WHEEL, rc_verified: true},
-
-  { unit: 'C-604', vehicle_number: "GJ-07-CC-8186", type: TWO_WHEEL, rc_verified: true},
-
-  { unit: 'C-701', vehicle_number: "GJ-09-EB-0281", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'C-701', vehicle_number: "GJ-09-CV-3504", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'C-701', vehicle_number: "GJ-03-HA-7792", type: FOUR_WHEEL, rc_verified: true},
-
-  { unit: 'C-804', vehicle_number: "GJ-27-BF-8512", type: TWO_WHEEL, rc_verified: false},
-  { unit: 'C-804', vehicle_number: "GJ-38-BB-0406", type: FOUR_WHEEL, rc_verified: true},
-
-  { unit: 'C-1204', vehicle_number: "GJ-01-YJ-2822", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'C-1204', vehicle_number: "GJ-01-WW-0398", type: FOUR_WHEEL, rc_verified: true},
-
-
-
-
-  { unit: 'D-401', vehicle_number: "GJ-01-VG-2327", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'D-401', vehicle_number: "GJ-01-WH-8953", type: FOUR_WHEEL, rc_verified: true},
-
-  { unit: 'D-502', vehicle_number: "GJ-01-VJ-5473", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'D-502', vehicle_number: "GJ-01-XV-6688", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'D-502', vehicle_number: "GJ-01-PD-8753", type: TWO_WHEEL, rc_verified: true},
-
-  { unit: 'D-703', vehicle_number: "GJ-02-BL-5367", type: TWO_WHEEL, rc_verified: true},
-
-
-
-
-  { unit: 'E-202', vehicle_number: "GJ-27-BH-7716", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'E-202', vehicle_number: "GJ-01-YG-6984", type: TWO_WHEEL, rc_verified: true},
-
-  { unit: 'E-304', vehicle_number: "GJ-09-DK-6275", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'E-304', vehicle_number: "GJ-01-PU-9200", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'E-304', vehicle_number: "GJ-09-BC-5581", type: FOUR_WHEEL, rc_verified: true},
-
-  { unit: 'E-901', vehicle_number: "GJ-01-UL-3798", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'E-901', vehicle_number: "GJ-01-JV-0475", type: TWO_WHEEL, rc_verified: true},
-
-  { unit: 'E-1004', vehicle_number: "GJ-01-XD-0984", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'E-1004', vehicle_number: "GJ-01-VU-5634", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'E-1004', vehicle_number: "GJ-23-CF-6584", type: FOUR_WHEEL, rc_verified: true},
-
-  { unit: 'E-1105', vehicle_number: "GJ-02-EJ-3823", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'E-1105', vehicle_number: "GJ-02-6824", type: TWO_WHEEL, rc_verified: false},
-  { unit: 'E-1105', vehicle_number: "GJ-09-BJ-1525", type: FOUR_WHEEL, rc_verified: true},
-  { unit: 'E-1105', vehicle_number: "GJ-02-CA-7119", type: FOUR_WHEEL, rc_verified: true},
-
-  { unit: 'E-1205', vehicle_number: "GJ-07-BL-9503", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'E-1205', vehicle_number: "GJ-07-CJ-1033", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'E-1205', vehicle_number: "GJ-31-R-7457", type: FOUR_WHEEL, rc_verified: true},
-
-  { unit: 'F-201', vehicle_number: "GJ-01-YN-9323", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'F-201', vehicle_number: "GJ-01-XK-7193", type: TWO_WHEEL, rc_verified: true},
-
-  { unit: 'F-205', vehicle_number: "GJ-27-CS-7034", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'F-205', vehicle_number: "GJ-27-FV-9966", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'F-205', vehicle_number: "GJ-27-CL-2056", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'F-205', vehicle_number: "GJ-27-DH-6374", type: FOUR_WHEEL, rc_verified: true},
-
-  { unit: 'F-301', vehicle_number: "GJ-09-CQ-3962", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'F-301', vehicle_number: "GJ-01-JY-3544", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'F-301', vehicle_number: "GJ-01-NM-0248", type: TWO_WHEEL, rc_verified: true},
-
-  { unit: 'F-902', vehicle_number: "GJ-27-FY-9169", type: TWO_WHEEL, rc_verified: true},
-
-  { unit: 'F-1001', vehicle_number: "GJ-02-BF-8881", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'F-1001', vehicle_number: "GJ-18-DP-7419", type: TWO_WHEEL, rc_verified: true},
-
-  { unit: 'F-1103', vehicle_number: "GJ-01-VY-4334", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'F-1103', vehicle_number: "GJ-01-VB-2095", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'F-1103', vehicle_number: "GJ-27-CB-9734", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'F-1103', vehicle_number: "GJ-27-AP-6616", type: FOUR_WHEEL, rc_verified: true},
-
-  { unit: 'F-1404', vehicle_number: "GJ-04-12-2799", type: TWO_WHEEL, rc_verified: false},
-  { unit: 'F-1404', vehicle_number: "GJ-01-XV-0513", type: TWO_WHEEL, rc_verified: true},
-  { unit: 'F-1404', vehicle_number: "GJ-01-MT-5513", type: FOUR_WHEEL, rc_verified: true},
-  { unit: 'F-1404', vehicle_number: "GJ-06-69-7598", type: FOUR_WHEEL, rc_verified: false},
-
-];
+  const OWNERS = [
+    // --- BLOCK A ---
+    {
+      block: 'A',
+      unit: 'A-101',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-102',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-103',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-104',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-201',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-202',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-203',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-204',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-301',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-302',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-303',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-304',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-401',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-402',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-403',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-404',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-501',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-502',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-503',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-504',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-601',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-602',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-603',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-604',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-701',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-702',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-703',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-704',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-801',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-802',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-803',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-804',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-901',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-902',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-903',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-904',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1001',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1002',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1003',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1004',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1101',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1102',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1103',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1104',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1201',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1202',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1203',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1204',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1301',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1302',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1303',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'A',
+      unit: 'A-1304',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+
+    // --- BLOCK B ---
+    {
+      block: 'B',
+      unit: 'B-101',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-102',
+      name: 'MANISH DIVAKAR',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-27-DJ-2960", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-TJ-9940", type: THREE_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-27-EE-1488", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'B',
+      unit: 'B-103',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-104',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-201',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-202',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-203',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-204',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-301',
+      name: 'RAJESHBHAI PATEL',
+      phone: '9426367966',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-27-DL-4100", type: TWO_WHEEL, rc_verified: false},
+        { vehicle_number: "GJ-27-DD-0837", type: TWO_WHEEL, rc_verified: false},
+        { vehicle_number: "GJ-27-ED-6167", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'B',
+      unit: 'B-302',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-303',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-304',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-401',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-402',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-403',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-404',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-501',
+      name: 'BHARATBHAI PATEL',
+      phone: '9824855033',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-01-UH-9056", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-JE-6814", type: TWO_WHEEL, rc_verified: false},
+        { vehicle_number: "GJ-18-AH-5757", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'B',
+      unit: 'B-502',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-503',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-504',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-601',
+      name: 'RAJDEEP NAYAK',
+      phone: '8156073303',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-01-VG-7017", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-27-AC-4047", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-HV-8794", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'B',
+      unit: 'B-602',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-603',
+      name: 'NILESH SHARMA',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-01-LS-9671", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-XG-1651", type: TWO_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'B',
+      unit: 'B-604',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-701',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-702',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-703',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-704',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-801',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-802',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-803',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-804',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-901',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-902',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-903',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-904',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1001',
+      name: 'RAJESHKUMAR SUTHAR',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-01-EA-6806", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-NJ-6280", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-RV-0206", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'B',
+      unit: 'B-1002',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1003',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1004',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1101',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1102',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1103',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1104',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1201',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1202',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1203',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1204',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1301',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1302',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1303',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'B',
+      unit: 'B-1304',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+
+    // --- BLOCK C ---
+    {
+      block: 'C',
+      unit: 'C-101',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-102',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-103',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-104',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-201',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-202',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-203',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-204',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-301',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-302',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-303',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-304',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-401',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-402',
+      name: 'HARSHABEN PATEL',
+      phone: '9426524897',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-09-CU-2716", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-09-AN-1874", type: TWO_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'C',
+      unit: 'C-403',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-404',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-501',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-502',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-503',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-504',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-601',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-602',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-603',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-604',
+      name: 'TARUN KUMAR DARJI',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-07-CC-8186", type: TWO_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'C',
+      unit: 'C-701',
+      name: 'PATEL ANKIT',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-09-EB-0281", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-09-CV-3504", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-03-HA-7792", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'C',
+      unit: 'C-702',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-703',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-704',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-801',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-802',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-803',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-804',
+      name: 'PRAMOD KUMAR TIWARI',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-27-BF-8512", type: TWO_WHEEL, rc_verified: false},
+        { vehicle_number: "GJ-38-BB-0406", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'C',
+      unit: 'C-901',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-902',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-903',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-904',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1001',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1002',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1003',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1004',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1101',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1102',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1103',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1104',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1201',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1202',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1203',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1204',
+      name: 'VRAGESHKUMAR DHOBI',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-01-YJ-2822", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-WW-0398", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'C',
+      unit: 'C-1301',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1302',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1303',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'C',
+      unit: 'C-1304',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+
+    // --- BLOCK D ---
+    {
+      block: 'D',
+      unit: 'D-101',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-102',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-103',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-104',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-201',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-202',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-203',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-204',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-301',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-302',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-303',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-304',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-401',
+      name: 'BHUPENDRABHAI PRAJAPATI',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-01-VG-2327", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-WH-8953", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'D',
+      unit: 'D-402',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-403',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-404',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-501',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-502',
+      name: 'RINKU BAGHEL',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-01-VJ-5473", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-XV-6688", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-PD-8753", type: TWO_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'D',
+      unit: 'D-503',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-504',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-601',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-602',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-603',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-604',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-701',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-702',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-703',
+      name: 'MAYURPURI GOSWAMI',
+      phone: '9106983302',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-02-BL-5367", type: TWO_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'D',
+      unit: 'D-704',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-801',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-802',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-803',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-804',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-901',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-902',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-903',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-904',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1001',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1002',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1003',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1004',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1101',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1102',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1103',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1104',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1201',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1202',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1203',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1204',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1301',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1302',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1303',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'D',
+      unit: 'D-1304',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+
+    // --- BLOCK E ---
+    {
+      block: 'E',
+      unit: 'E-101',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-102',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-103',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-104',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-105',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-201',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-202',
+      name: 'SACHINBHAI OAD',
+      phone: '9925505895',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-27-BH-7716", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-YG-6984", type: TWO_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'E',
+      unit: 'E-203',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-204',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-205',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-301',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-302',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-303',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-304',
+      name: 'FORAMBEN VYAS',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-09-DK-6275", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-PU-9200", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-09-BC-5581", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'E',
+      unit: 'E-305',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-401',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-402',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-403',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-404',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-405',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-501',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-502',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-503',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-504',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-505',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-601',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-602',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-603',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-604',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-605',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-701',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-702',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-703',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-704',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-705',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-801',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-802',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-803',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-804',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-805',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-901',
+      name: 'PATEL BHAVESHKUMAR',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-01-UL-3798", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-JV-0475", type: TWO_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'E',
+      unit: 'E-902',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-903',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-904',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-905',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1001',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1002',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1003',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1004',
+      name: 'RILESH KUMAR BAROT',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-01-XD-0984", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-VU-5634", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-23-CF-6584", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'E',
+      unit: 'E-1005',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1101',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1102',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1103',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1104',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1105',
+      name: 'KETULBHAI SUTHAR',
+      phone: '9664696698',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-02-EJ-3823", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-02-6824", type: TWO_WHEEL, rc_verified: false},
+        { vehicle_number: "GJ-09-BJ-1525", type: FOUR_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-02-CA-7119", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'E',
+      unit: 'E-1201',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1202',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1203',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1204',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1205',
+      name: 'KATHAN PATEL',
+      phone: '8200926737',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-07-BL-9503", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-07-CJ-1033", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-31-R-7457", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'E',
+      unit: 'E-1301',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1302',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1303',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1304',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1305',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1401',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1402',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1403',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1404',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'E',
+      unit: 'E-1405',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+
+    // --- BLOCK F ---
+    {
+      block: 'F',
+      unit: 'F-101',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-102',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-103',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-104',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-105',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-201',
+      name: 'NIRAV PATEL',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-01-YN-9323", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-XK-7193", type: TWO_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'F',
+      unit: 'F-202',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-203',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-204',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-205',
+      name: 'RATHOD RAKESH KUMAR',
+      phone: '9913093281',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-27-CS-7034", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-27-FV-9966", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-27-CL-2056", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-27-DH-6374", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'F',
+      unit: 'F-301',
+      name: 'KRUNAL KUMAR PRAJAPATI',
+      phone: '8511742509',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-09-CQ-3962", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-JY-3544", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-NM-0248", type: TWO_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'F',
+      unit: 'F-302',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-303',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-304',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-305',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-401',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-402',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-403',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-404',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-405',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-501',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-502',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-503',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-504',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-505',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-601',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-602',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-603',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-604',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-605',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-701',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-702',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-703',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-704',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-705',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-801',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-802',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-803',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-804',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-805',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-901',
+      name: '',
+      phone: '',
+      is_owner: false,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-902',
+      name: 'VIPUL MAHETA',
+      phone: '',
+      is_owner: false,
+      vehicles: [
+        { vehicle_number: "GJ-27-FY-9169", type: TWO_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'F',
+      unit: 'F-903',
+      name: '',
+      phone: '',
+      is_owner: false,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-904',
+      name: '',
+      phone: '',
+      is_owner: false,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-905',
+      name: '',
+      phone: '',
+      is_owner: false,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1001',
+      name: 'HARSH KUMAR PATEL',
+      phone: '',
+      is_owner: false,
+      vehicles: [
+        { vehicle_number: "GJ-02-BF-8881", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-18-DP-7419", type: TWO_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'F',
+      unit: 'F-1002',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1003',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1004',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1005',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1101',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1102',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1103',
+      name: 'MAYURDHVAJSINH GOHEL',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-01-VY-4334", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-VB-2095", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-27-CB-9734", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-27-AP-6616", type: FOUR_WHEEL, rc_verified: true}
+      ]
+    },
+    {
+      block: 'F',
+      unit: 'F-1104',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1105',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1201',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1202',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1203',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1204',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1205',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1301',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1302',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1303',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1304',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1305',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1401',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1402',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1403',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    },
+    {
+      block: 'F',
+      unit: 'F-1404',
+      name: 'KIRITBHAI PANDYA',
+      phone: '',
+      is_owner: true,
+      vehicles: [
+        { vehicle_number: "GJ-04-12-2799", type: TWO_WHEEL, rc_verified: false},
+        { vehicle_number: "GJ-01-XV-0513", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-MT-5513", type: FOUR_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-06-69-7598", type: FOUR_WHEEL, rc_verified: false}
+      ]
+    },
+    {
+      block: 'F',
+      unit: 'F-1405',
+      name: '',
+      phone: '',
+      is_owner: true,
+      vehicles: []
+    }
+  ];
 
 const vehicleRegex = /^[A-Z]{2}-\d{2}-[A-Z]{2}-\d{4}$/i;
 
-$("#searchForm").submit(function (e) {
-  e.preventDefault();
+  $(document).ready(function () {
 
-  const input = $("#vehicle_number").val().trim();
+    /* =========================
+       SEARCH FORM
+    ==========================*/
+    $("#searchForm").on("submit", function (e) {
+      e.preventDefault();
 
-  if (!vehicleRegex.test(input)) {
-    $("#search-result").html(
-      `<div class="alert alert-danger rounded-3">Invalid format. Example: GJ-01-AB-1234</div>`
-    );
-    return;
+      const input = $("#vehicle_number").val().trim();
+
+      if (!vehicleRegex.test(input)) {
+        $("#search-result").html(
+          `<div class="alert alert-danger rounded-3">
+          Invalid format. Example: GJ-01-AB-1234
+        </div>`
+        );
+        return;
+      }
+
+      let foundOwner = null;
+      let foundVehicle = null;
+
+      // Search inside nested vehicles
+      OWNERS.forEach(owner => {
+        owner.vehicles.forEach(vehicle => {
+          if (vehicle.vehicle_number.toLowerCase() === input.toLowerCase()) {
+            foundOwner = owner;
+            foundVehicle = vehicle;
+          }
+        });
+      });
+
+      if (foundOwner) {
+        $("#search-result").html(`
+        <div class="alert alert-success text-start rounded-3">
+          <strong>Vehicle Found</strong><br><br>
+          👤 <strong>${foundOwner.name}</strong><br>
+          🚗 ${foundVehicle.vehicle_number}<br>
+          📞 ${foundOwner.phone}<br>
+          🏠 ${foundOwner.unit} (Block ${foundOwner.block})<br>
+          ✅ RC Verified: ${foundVehicle.rc_verified ? 'Yes' : 'No'}
+        </div>
+      `);
+      } else {
+        $("#search-result").html(
+          `<div class="alert alert-warning rounded-3">
+          No record found.
+        </div>`
+        );
+      }
+    });
+
+    $("#cancelBtn").on("click", function () {
+      $("#vehicle_number").val("").focus();
+      $("#search-result").html("");
+    });
+
+
+    /* =========================
+       TABLE VIEW (Hash Based)
+    ==========================*/
+    if (window.location.hash === "#table_view") {
+
+      $('#search-view').hide();
+      $('#table-view').show();
+
+      renderBlocks();
+    }
+  });
+
+
+  /* =========================
+     RENDER BLOCKS
+  ==========================*/
+  function renderBlocks() {
+
+    const grouped = {};
+
+    // Group owners by block
+    OWNERS.forEach(owner => {
+      if (!grouped[owner.block]) {
+        grouped[owner.block] = [];
+      }
+      grouped[owner.block].push(owner);
+    });
+
+    // Render each block
+    Object.keys(grouped).forEach(block => {
+
+      let html = '';
+
+      grouped[block].forEach(owner => {
+
+        const hasOwner = owner.name.length > 0;
+        const color = hasOwner ? 'background-color: lightgreen;' : '';
+
+        html += `
+        <div style="margin:5px;">
+          <button
+            class="block-number btn btn-sm btn-outline-dark"
+            style="${color}"
+            data-unit="${owner.unit}">
+            <b>${owner.unit}</b>
+          </button>
+
+          <table class="table mt-2"
+                 id="${owner.unit}-table"
+                 style="display:none;">
+            <tr>
+              <td><strong>Name:</strong> ${owner.name}</td>
+            </tr>
+            <tr>
+              <td><strong>Phone:</strong> ${owner.phone}</td>
+            </tr>
+            <tr>
+              <td><strong>Vehicles:</strong></td>
+            </tr>
+            ${owner.vehicles.map(v => `
+              <tr>
+                <td>${v.vehicle_number} (${v.type})</td>
+              </tr>
+            `).join('')}
+          </table>
+        </div>
+      `;
+      });
+
+      $(`#block-${block}`).html(html);
+    });
+
+    // Event delegation (better than inline onclick)
+    $(document).on('click', '.block-number', function () {
+      const unit = $(this).data('unit');
+      $(`#${unit}-table`).toggle();
+    });
   }
-
-  const user = users.find(
-    u => u.vehicle_number.toLowerCase() === input.toLowerCase()
-  );
-
-  if (user) {
-    $("#search-result").html(`
-      <div class="alert alert-success text-start rounded-3">
-        <strong>Vehicle Found</strong><br>
-        🚗 <h3>${user.name}</h3><br>
-        🚗 ${user.vehicle_number}<br>
-        📞 ${user.phone_number}<br>
-        🏠 ${user.unit_number}
-      </div>
-    `);
-  } else {
-    $("#search-result").html(
-      `<div class="alert alert-warning rounded-3">No record found.</div>`
-    );
-  }
-});
-
-$("#cancelBtn").click(function () {
-  $("#vehicle_number").val("").focus();
-  $("#search-result").html("");
-});
 </script>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
 
