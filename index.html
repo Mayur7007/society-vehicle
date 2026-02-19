@@ -350,7 +350,7 @@
         { vehicle_number: "GJ-27-FE-4797", type: TWO_WHEEL, rc_verified: true},
         { vehicle_number: "GJ-08-CJ-3229", type: TWO_WHEEL, rc_verified: true},
         { vehicle_number: "GJ-08-AC-8249", type: TWO_WHEEL, rc_verified: true},
-        { vehicle_number: "GJ-27-K-5383", type: FOUR_WHEEL, rc_verified: true}
+        { vehicle_number: "GJ-27-BS-0162", type: FOUR_WHEEL, rc_verified: true}
       ]
     },
     {
@@ -493,7 +493,7 @@
       is_owner: true,
       vehicles: [
         { vehicle_number: "GJ-01-YP-9812", type: TWO_WHEEL, rc_verified: true},
-        { vehicle_number: "GJ-01-NL-1215", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-NL-1275", type: TWO_WHEEL, rc_verified: true},
         { vehicle_number: "GJ-01-KQ-6052", type: FOUR_WHEEL, rc_verified: true}
       ]
     },
@@ -1280,7 +1280,7 @@
       block: 'C',
       unit: 'C-604',
       name: 'TARUN KUMAR DARJI',
-      phone: '',
+      phone: '9099838922',
       is_owner: true,
       vehicles: [
         { vehicle_number: "GJ-07-CC-8186", type: TWO_WHEEL, rc_verified: true}
@@ -1310,7 +1310,7 @@
       block: 'C',
       unit: 'C-703',
       name: 'DARSHAK PATEL',
-      phone: '',
+      phone: '9726710845',
       is_owner: true,
       vehicles: [
         { vehicle_number: "GJ-27-CD-3416", type: TWO_WHEEL, rc_verified: true},
@@ -1870,7 +1870,7 @@
       is_owner: true,
       vehicles: [
         { vehicle_number: "GJ-18-AA-7482", type: TWO_WHEEL, rc_verified: true},
-        { vehicle_number: "GJ-09-CC-2492", type: FOUR_WHEEL, rc_verified: true}
+        { vehicle_number: "GJ-09-CL-2492", type: FOUR_WHEEL, rc_verified: true}
       ]
     },
     {
@@ -2463,12 +2463,12 @@
       block: 'E',
       unit: 'E-1004',
       name: 'RILESH KUMAR BAROT',
-      phone: '',
+      phone: '9998816704',
       is_owner: true,
       vehicles: [
         { vehicle_number: "GJ-01-XD-0984", type: TWO_WHEEL, rc_verified: true},
         { vehicle_number: "GJ-01-VU-5634", type: TWO_WHEEL, rc_verified: true},
-        { vehicle_number: "GJ-23-CF-6584", type: FOUR_WHEEL, rc_verified: true}
+        { vehicle_number: "GJ-23-CF-6585", type: FOUR_WHEEL, rc_verified: true}
       ]
     },
     {
@@ -2523,7 +2523,7 @@
       vehicles: [
         { vehicle_number: "GJ-02-EJ-3823", type: TWO_WHEEL, rc_verified: true},
         { vehicle_number: "GJ-02-6824", type: TWO_WHEEL, rc_verified: false},
-        { vehicle_number: "GJ-09-BJ-1525", type: FOUR_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-09-AG-1525", type: FOUR_WHEEL, rc_verified: true},
         { vehicle_number: "GJ-02-CA-7119", type: FOUR_WHEEL, rc_verified: true}
       ]
     },
@@ -2989,7 +2989,7 @@
       block: 'F',
       unit: 'F-802',
       name: 'MITESH PARSANIYA',
-      phone: '',
+      phone: '9429565045',
       is_owner: true,
       vehicles: [
         { vehicle_number: "GJ-06-LR-2117", type: TWO_WHEEL, rc_verified: true}
@@ -3275,10 +3275,14 @@
     {
       block: 'F',
       unit: 'F-1403',
-      name: '',
-      phone: '',
+      name: 'KARAN KIRITKUMAR PUJARA',
+      phone: '7405489221',
       is_owner: true,
-      vehicles: []
+      vehicles: [
+        { vehicle_number: "GJ-01-VA-7642", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-UV-0593", type: TWO_WHEEL, rc_verified: true},
+        { vehicle_number: "GJ-01-WZ-8971", type: FOUR_WHEEL, rc_verified: true}
+      ]
     },
     {
       block: 'F',
@@ -3303,7 +3307,7 @@
     }
   ];
 
-  const vehicleRegex = /^[A-Z]{2}-\d{2}-[A-Z]{2}-\d{4}$/i;
+  const vehicleRegex = /^[A-Z]{2}-\d{2}-[A-Z]{1,2}-\d{4}$/i;
 
   // console.log('length OWNERS', OWNERS) // 348
 
@@ -3318,7 +3322,7 @@
     $("#searchForm").on("submit", function (e) {
       e.preventDefault();
 
-      const input = $("#vehicle_number").val().trim();
+      const input = $("#vehicle_number").val().trim().toUpperCase();
 
       if (!vehicleRegex.test(input)) {
         $("#search-result").html(
@@ -3449,4 +3453,3 @@
 </script>
 </body>
 </html>
-
